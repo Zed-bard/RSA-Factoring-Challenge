@@ -2,6 +2,21 @@
 #include <stdlib.h>
 #include <math.h>
 
+void factorize(long int number) {
+    printf("%li=", number);
+
+    int factor = 2;
+    while (factor <= sqrt(number)) {
+        if (number % factor == 0) {
+            printf("%i*", factor);
+            number = number / factor;
+        } else {
+            factor++;
+        }
+    }
+    printf("%li\n", number);
+}
+
 int main(int argc, char *argv[]) {
     FILE *file;
     char *line = NULL;
@@ -21,19 +36,7 @@ int main(int argc, char *argv[]) {
 
     while ((read = getline(&line, &len, file)) != -1) {
         long int number = atol(line);
-        printf("%li=", number);
-
-        int factor = 2;
-        while (factor <= sqrt(number)) {
-            if (number % factor == 0) {
-                printf("%i*", factor);
-                number = number / factor;
-            } else {
-                factor++;
-            }
-        }
-        
-        printf("%li\n", number);
+        factorize(number);
     }
 
     fclose(file);
